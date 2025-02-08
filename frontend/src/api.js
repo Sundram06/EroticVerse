@@ -1,6 +1,7 @@
 const API_BASE_URL =
 	process.env.NODE_ENV === "production"
-		? process.env.REACT_APP_API_URL // ✅ Use Render backend in production
-		: process.env.REACT_APP_DEV_API_URL; // ✅ Use localhost in development
+		? "https://eroticverse.onrender.com" // ✅ Use Render backend in production
+		: "http://localhost:5000"; // ✅ Use localhost in development
 
+console.log(API_BASE_URL);
 export default API_BASE_URL;
