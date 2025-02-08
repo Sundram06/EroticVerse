@@ -22,14 +22,18 @@ const port = process.env.PORT || 5000;
 // Fix Mongoose warning
 mongoose.set("strictQuery", true);
 
+app.use(helmet()); // ✅ Blocks XSS and security vulnerabilities
+
 // Middleware
 app.use(
 	cors({
-		origin: FRONTEND_URL,
-		credentials: true,
+		origin: FRONTEND_URL, // ✅ Allow frontend requests
+		credentials: true, // ✅ Allow cookies & sessions
+		methods: ["GET", "POST", "PUT", "DELETE"], // ✅ Allow these methods
+		allowedHeaders: ["Content-Type", "Authorization"], // ✅ Allow headers
 	})
 );
-app.use(helmet()); // ✅ Blocks XSS and security vulnerabilities
+
 app.use(express.json());
 app.use(cookieParser());
 
