@@ -19,12 +19,10 @@ const FRONTEND_URL =
 
 const port = process.env.PORT || 5000;
 
-// Fix Mongoose warning
+// ✅ Fix Mongoose warning
 mongoose.set("strictQuery", true);
 
-app.use(helmet()); // ✅ Blocks XSS and security vulnerabilities
-
-// Middleware
+// ✅ Enable CORS (MUST be before helmet to avoid conflicts)
 app.use(
 	cors({
 		origin: FRONTEND_URL, // ✅ Allow frontend requests
@@ -34,10 +32,24 @@ app.use(
 	})
 );
 
+// ✅ Enable security headers (AFTER CORS to prevent conflicts)
+app.use(helmet());
+
+// ✅ Enable JSON parsing and Cookie handling
 app.use(express.json());
 app.use(cookieParser());
 
-// Connect to MongoDB
+// ✅ Secure Cookies in Production
+app.use((req, res, next) => {
+	res.cookie("admin_token", "", {
+		httpOnly: true,
+		secure: process.env.NODE_ENV === "production", // ✅ Secure in production
+		sameSite: "Strict",
+	});
+	next();
+});
+
+// ✅ Connect to MongoDB
 mongoose
 	.connect(process.env.MONGODB_URI, {
 		useNewUrlParser: true,
@@ -52,13 +64,15 @@ const loginLimiter = rateLimit({
 	max: 5, // 5 attempts per IP
 	message: "Too many login attempts. Try again later.",
 });
-app.use("/api/admin/login", loginLimiter);
+
 // ✅ Use Admin Authentication Routes
+app.use("/api/admin/login", loginLimiter); // ✅ Apply rate limiter to login only
 app.use("/api/admin", adminRoutes);
 
 // ✅ Use Content Routes
 app.use("/api/content", contentRoutes);
 
+// ✅ Start Server
 app.listen(port, () => {
 	console.log(`🚀 Server running on port ${port}`);
 });
