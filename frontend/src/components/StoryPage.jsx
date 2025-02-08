@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-
+import API_BASE_URL from "../api";
 function StoryPage() {
 	const { id } = useParams();
 	const [story, setStory] = useState(null);
@@ -11,7 +11,7 @@ function StoryPage() {
 	useEffect(() => {
 		const fetchStory = async () => {
 			try {
-				const res = await axios.get(`http://localhost:5000/api/content/${id}`);
+				const res = await axios.get(`${API_BASE_URL}/api/content/${id}`);
 				setStory(res.data);
 				setLoading(false);
 			} catch (err) {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import API_BASE_URL from "../api";
 function ContentForm({ onNewContent }) {
 	const [title, setTitle] = useState("");
 	const [body, setBody] = useState("");
@@ -20,7 +20,7 @@ function ContentForm({ onNewContent }) {
 			.filter((tag) => tag !== "");
 
 		try {
-			const response = await axios.post("http://localhost:5000/api/content", {
+			const response = await axios.post(`${API_BASE_URL}/api/content`, {
 				title,
 				body,
 				tags: tagArray,

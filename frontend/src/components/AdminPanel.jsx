@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ContentForm from "./ContentForm";
-
+import API_BASE_URL from "../api";
 function AdminPanel({ onNewContent }) {
 	const [authenticated, setAuthenticated] = useState(false);
 	const [password, setPassword] = useState("");
@@ -11,7 +11,7 @@ function AdminPanel({ onNewContent }) {
 	// ✅ Check if admin is already logged in (JWT stored in cookies)
 	useEffect(() => {
 		axios
-			.get("http://localhost:5000/api/admin/check", { withCredentials: true })
+			.get(`${API_BASE_URL}/api/admin/check`, { withCredentials: true })
 			.then(() => setAuthenticated(true))
 			.catch(() => setAuthenticated(false));
 	}, []);
@@ -21,7 +21,7 @@ function AdminPanel({ onNewContent }) {
 		e.preventDefault();
 		try {
 			const response = await axios.post(
-				"http://localhost:5000/api/admin/login",
+				`${API_BASE_URL}/api/admin/login`,
 				{ username: "admin", password },
 				{ withCredentials: true }
 			);
@@ -36,7 +36,7 @@ function AdminPanel({ onNewContent }) {
 	// ✅ Handle Logout
 	const handleLogout = async () => {
 		await axios.post(
-			"http://localhost:5000/api/admin/logout",
+			`${API_BASE_URL}/api/admin/logout`,
 			{},
 			{ withCredentials: true }
 		);

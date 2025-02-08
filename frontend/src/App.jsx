@@ -6,7 +6,7 @@ import AdminPanel from "./components/AdminPanel";
 import StoryPage from "./components/StoryPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
+import API_BASE_URL from "./api";
 function Home() {
 	const [contents, setContents] = useState([]);
 	const [selectedTag, setSelectedTag] = useState("");
@@ -17,8 +17,8 @@ function Home() {
 	const fetchContents = async (tag = "") => {
 		try {
 			const endpoint = tag
-				? `http://localhost:5000/api/content/tag/${tag}`
-				: "http://localhost:5000/api/content"; // Ensure full API URL
+				? `${API_BASE_URL}/api/content/tag/${tag}`
+				: `${API_BASE_URL}/api/content`; // Ensure full API URL
 			const res = await axios.get(endpoint);
 			setContents(res.data);
 		} catch (err) {
@@ -42,7 +42,7 @@ function Home() {
 		try {
 			// ✅ Log the request URL to verify it's correct
 			const encodedTags = encodeURIComponent(searchTags);
-			const requestUrl = `http://localhost:5000/api/content/search?tags=${encodedTags}`;
+			const requestUrl = `${API_BASE_URL}/api/content/search?tags=${encodedTags}`;
 			console.log("🔎 Sending request to:", requestUrl);
 
 			const response = await axios.get(requestUrl);
@@ -125,5 +125,4 @@ function App() {
 		</Routes>
 	);
 }
-
 export default App;

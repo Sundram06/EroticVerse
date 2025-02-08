@@ -11,6 +11,12 @@ import helmet from "helmet";
 dotenv.config();
 
 const app = express();
+
+const FRONTEND_URL =
+	process.env.NODE_ENV === "production"
+		? "https://eroticverseweb.onrender.com" // ✅ Production Frontend URL
+		: "http://localhost:3001"; // ✅ Dev Frontend URL
+
 const port = process.env.PORT || 5000;
 
 // Fix Mongoose warning
@@ -19,8 +25,8 @@ mongoose.set("strictQuery", true);
 // Middleware
 app.use(
 	cors({
-		origin: "http://localhost:3001",
-		credentials: true, // ✅ Allow cookies to be sent
+		origin: FRONTEND_URL,
+		credentials: true,
 	})
 );
 app.use(helmet()); // ✅ Blocks XSS and security vulnerabilities

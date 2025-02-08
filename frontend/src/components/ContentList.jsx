@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import API_BASE_URL from "../api";
 function ContentList({ contents, setContents, onTagClick, onDeleteStory }) {
 	const [isAdmin, setIsAdmin] = useState(false);
 
@@ -9,7 +9,7 @@ function ContentList({ contents, setContents, onTagClick, onDeleteStory }) {
 	useEffect(() => {
 		const checkAdmin = async () => {
 			try {
-				await axios.get("http://localhost:5000/api/admin/check", {
+				await axios.get(`${API_BASE_URL}/api/admin/check`, {
 					withCredentials: true,
 				});
 				setIsAdmin(true);
@@ -29,7 +29,7 @@ function ContentList({ contents, setContents, onTagClick, onDeleteStory }) {
 
 		if (window.confirm("Are you sure you want to delete this story?")) {
 			try {
-				await axios.delete(`http://localhost:5000/api/content/${id}`, {
+				await axios.delete(`${API_BASE_URL}/api/content/${id}`, {
 					withCredentials: true,
 				});
 				onDeleteStory(id); // ✅ Remove story from UI after successful deletion
