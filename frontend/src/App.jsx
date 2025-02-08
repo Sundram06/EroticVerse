@@ -5,6 +5,7 @@ import ContentList from "./components/ContentList";
 import AdminPanel from "./components/AdminPanel";
 import StoryPage from "./components/StoryPage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 function Home() {
 	const [contents, setContents] = useState([]);
@@ -77,7 +78,7 @@ function Home() {
 
 	return (
 		<div className="container my-4">
-			<h1 className="mb-4">EroticVerse</h1>
+			<h1 className="eroticverse-header">EroticVerse</h1>
 
 			{/* ✅ Single Search Bar for Multi-Tag Search */}
 			<form onSubmit={handleSearch} className="mb-3">

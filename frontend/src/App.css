@@ -1,0 +1,24 @@
+/* 🔥 Styled Header for "EroticVerse" */
+.eroticverse-header {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #ff4081;
+    /* Vibrant pink color */
+    background: linear-gradient(90deg, #ff4081, #ff80ab);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 8px rgba(255, 64, 129, 0.5);
+    border-bottom: 2px solid #ff4081;
+    letter-spacing: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* 🎨 Add hover effect */
+.eroticverse-header:hover {
+    color: #ff80ab;
+    transform: scale(1.05);
+    cursor: pointer;
+}
