@@ -4,4 +4,6 @@ const API_BASE_URL =
 		: "http://localhost:5000"; // ✅ Use localhost in development
 
 console.log(API_BASE_URL);
+console.log("Frontend API URL:", process.env.REACT_APP_API_URL);
+
 export default API_BASE_URL;

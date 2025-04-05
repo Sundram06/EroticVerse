@@ -18,7 +18,7 @@ const FRONTEND_URL =
 		: "http://localhost:3001"; // ✅ Dev Frontend URL
 
 const port = process.env.PORT || 5000;
-
+console.log(FRONTEND_URL);
 // ✅ Fix Mongoose warning
 mongoose.set("strictQuery", true);
 
@@ -63,6 +63,13 @@ const loginLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
 	max: 5, // 5 attempts per IP
 	message: "Too many login attempts. Try again later.",
+});
+
+app.get("/health", (req, res) => {
+	res.status(200).json({
+		status: "OK",
+		message: "Server is running smoothly.",
+	});
 });
 
 // ✅ Use Admin Authentication Routes
