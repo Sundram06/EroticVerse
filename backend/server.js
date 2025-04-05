@@ -14,7 +14,7 @@ const app = express();
 
 const FRONTEND_URL =
 	process.env.NODE_ENV === "production"
-		? "https://eroticverseweb.onrender.com" // ✅ Production Frontend URL
+		? "https://eroticverse.onrender.com" // ✅ Production Frontend URL
 		: "http://localhost:3001"; // ✅ Dev Frontend URL
 
 const port = process.env.PORT || 5000;
